@@ -15,8 +15,8 @@ Function New-PerformanceCounterMonitorThresholdObject {
     )
     <#
     Required Functions:
-        https://raw.githubusercontent.com/dpaulson45/PublicPowerShellScripts/master/Functions/Common/Write-HostWriters/Write-ScriptMethodHostWriter.ps1
-        https://raw.githubusercontent.com/dpaulson45/PublicPowerShellScripts/master/Functions/Common/Write-VerboseWriters/Write-ScriptMethodVerboseWriter.ps1
+        https://raw.githubusercontent.com/dpaulson45/PublicPowerShellFunctions/master/src/Common/Write-HostWriters/Write-ScriptMethodHostWriter.ps1
+        https://raw.githubusercontent.com/dpaulson45/PublicPowerShellFunctions/master/src/Common/Write-VerboseWriters/Write-ScriptMethodVerboseWriter.ps1
     #>
     <#
     This works remotely as well
@@ -121,7 +121,7 @@ Function New-PerformanceCounterMonitorThresholdObject {
         $perfMonitorObject | Add-Member -MemberType ScriptMethod -Name "VerboseFunctionCaller" -Value $VerboseFunctionCaller
     }
 
-    #Master Template https://raw.githubusercontent.com/dpaulson45/PublicPowerShellScripts/master/Functions/Get-PerformanceCounterMinMaxAverageCorrectly/Get-PerformanceCounterMinMaxAverageCorrectly.ps1
+    #Master Template https://raw.githubusercontent.com/dpaulson45/PublicPowerShellFunctions/master/src/Get-PerformanceCounterMinMaxAverageCorrectly/Get-PerformanceCounterMinMaxAverageCorrectly.ps1
     $perfMonitorObject | Add-Member -MemberType ScriptMethod -Name "GetPerformanceCounterMinMaxAverageCorrectly" -Value {
 
         [CmdletBinding()]

@@ -6,7 +6,7 @@ Function Get-ExchangeMajorVersion {
     )
     <#
     Required Functions:
-        https://raw.githubusercontent.com/dpaulson45/PublicPowerShellScripts/master/Functions/Common/Write-VerboseWriters/Write-VerboseWriter.ps1
+        https://raw.githubusercontent.com/dpaulson45/PublicPowerShellFunctions/master/src/Common/Write-VerboseWriters/Write-VerboseWriter.ps1
     #>
 
     Write-VerboseWriter("Calling: Get-ExchangeMajorVersion")
