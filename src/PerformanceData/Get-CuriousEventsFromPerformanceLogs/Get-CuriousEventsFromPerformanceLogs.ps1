@@ -9,13 +9,13 @@ Function Get-CuriousEventsFromPerformanceLogs {
     )
     <#
     Required Functions:
-        https://raw.githubusercontent.com/dpaulson45/PublicPowerShellScripts/master/Functions/Common/Write-VerboseWriters/Write-VerboseWriter.ps1
-        https://raw.githubusercontent.com/dpaulson45/PublicPowerShellScripts/master/Functions/Common/Write-HostWriters/Write-HostWriter.ps1
-        https://raw.githubusercontent.com/dpaulson45/PublicPowerShellScripts/master/Functions/PerformanceData/Export-PerformanceDataToCSVFile/Export-PerformanceDataToCSVFile.ps1
-        https://raw.githubusercontent.com/dpaulson45/PublicPowerShellScripts/master/Functions/PerformanceData/New-CounterDataObject/New-CounterDataObject.ps1
+        https://raw.githubusercontent.com/dpaulson45/PublicPowerShellFunctions/master/src/Common/Write-VerboseWriters/Write-VerboseWriter.ps1
+        https://raw.githubusercontent.com/dpaulson45/PublicPowerShellFunctions/master/src/Common/Write-HostWriters/Write-HostWriter.ps1
+        https://raw.githubusercontent.com/dpaulson45/PublicPowerShellFunctions/master/src/PerformanceData/Export-PerformanceDataToCSVFile/Export-PerformanceDataToCSVFile.ps1
+        https://raw.githubusercontent.com/dpaulson45/PublicPowerShellFunctions/master/src/PerformanceData/New-CounterDataObject/New-CounterDataObject.ps1
     #>
     <#
-    [hashtable]LoadedPerfObject - return object from Load-PerformanceCounters:  https://raw.githubusercontent.com/dpaulson45/PublicPowerShellScripts/master/Functions/Import-PerformanceCounters/Import-PerformanceCounters.ps1
+    [hashtable]LoadedPerfObject - return object from Load-PerformanceCounters:  https://raw.githubusercontent.com/dpaulson45/PublicPowerShellFunctions/master/src/Import-PerformanceCounters/Import-PerformanceCounters.ps1
 
     [object]MultiThresholdConditionObject - All conditions must be met for it to be a curious event
         [hashtable]MultiThresholdCondition- key counter path '\\ServerName\processor(_total)\% processor time'

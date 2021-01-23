@@ -5,7 +5,7 @@ Function Get-ExchangeBuildVersionInformation {
     )
     <#
     Required Functions:
-        https://raw.githubusercontent.com/dpaulson45/PublicPowerShellScripts/master/Functions/Write-VerboseWriters/Write-VerboseWriter.ps1
+        https://raw.githubusercontent.com/dpaulson45/PublicPowerShellFunctions/master/src/Write-VerboseWriters/Write-VerboseWriter.ps1
     #>
 
     Write-VerboseWriter("Calling: Get-ExchangeBuildVersionInformation")

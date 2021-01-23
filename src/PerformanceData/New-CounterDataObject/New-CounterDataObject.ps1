@@ -7,7 +7,7 @@ Function New-CounterDataObject {
     )
     <#
     Required Functions:
-        https://raw.githubusercontent.com/dpaulson45/PublicPowerShellScripts/master/Functions/PerformanceData/Get-CounterSampleToCounterObjectName/Get-CounterSampleToCounterObjectName.ps1
+        https://raw.githubusercontent.com/dpaulson45/PublicPowerShellFunctions/master/src/PerformanceData/Get-CounterSampleToCounterObjectName/Get-CounterSampleToCounterObjectName.ps1
     #>
 
     Add-Type @"

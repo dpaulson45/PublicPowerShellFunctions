@@ -6,8 +6,8 @@ Function Get-TimeZoneInformationRegistrySettings {
     )
     <#
     Required Functions:
-        https://raw.githubusercontent.com/dpaulson45/PublicPowerShellScripts/master/Functions/Common/Write-VerboseWriters/Write-VerboseWriter.ps1
-        https://raw.githubusercontent.com/dpaulson45/PublicPowerShellScripts/master/Functions/ComputerInformation/Invoke-RegistryGetValue/Invoke-RegistryGetValue.ps1
+        https://raw.githubusercontent.com/dpaulson45/PublicPowerShellFunctions/master/src/Common/Write-VerboseWriters/Write-VerboseWriter.ps1
+        https://raw.githubusercontent.com/dpaulson45/PublicPowerShellFunctions/master/src/ComputerInformation/Invoke-RegistryGetValue/Invoke-RegistryGetValue.ps1
     #>
 
     Write-VerboseWriter("Calling: Get-TimeZoneInformationRegistrySettings")
