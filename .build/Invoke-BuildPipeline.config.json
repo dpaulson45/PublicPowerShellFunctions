@@ -1,0 +1,13 @@
+  {
+    "ScriptAnalyzerExcludeRules": [
+      {
+        "RuleName": "PSAvoidUsingWriteHost"
+      },
+      {
+        "RuleName": "PSUseApprovedVerbs"
+      },
+      {
+        "RuleName": "PSAvoidUsingInvokeExpression"
+      }
+    ]
+  }
