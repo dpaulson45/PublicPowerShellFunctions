@@ -21,6 +21,6 @@ steps:
   displayName: 'Run a multi-line script'
 
 - pwsh: |
-    cd .\Build
+    cd .\.build
     .\Invoke-BuildPipeline.ps1 -CodeFormatCheck
   displayName: "Invoke Build Pipeline"
