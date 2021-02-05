@@ -17,6 +17,7 @@ Major | Provides the Major build of the load computer from the registry
 Minor | Provides the Minor build of the load computer from the registry
 Build | Provides the Build build of the load computer from the registry
 Revision | Provides the Revision build of the load computer from the registry
+EdgeServer | Determines if this is an Exchange Edge Transport Server or not
 ToolsOnly | Determines if this is a tools only computer or not
 RemoteShell | Determines if that we are connect to Exchange Management Shell through a remote shell connection.
 
