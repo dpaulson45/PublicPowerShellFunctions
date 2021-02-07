@@ -1,0 +1,18 @@
+{
+  "EnableEmailNotification": false,
+  "SMTPSender": "david@adt.local",
+  "EventID": 2024,
+  "MDBFailureItemTags": [
+    38,
+    39
+  ],
+  "ExtraTraceConfigFileContent": [
+    "TraceLevelsDebug,Warning,Error,Fatal,Info,Performance,Function,Pfd",
+    "ManagedStore.MapiDispRpcBuffer,RpcOperation,RpcDetail,RpcContextPool",
+    "ManagedStore.MapiRpcGeneral,RpcOperation,FaultInjection",
+    "MapiNettagCxhPool,tagLocation",
+    "ManagedStore.RpcProxyProxyAdmin",
+    "FilteredTracingNo",
+    "InMemoryTracingNo"
+  ]
+}
