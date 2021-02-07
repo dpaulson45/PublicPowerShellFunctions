@@ -29,7 +29,7 @@ foreach ($line in $content) {
     }
 }
 
-$testingFile = "{0}\Tests\TestingConditions.json" -f $here
+$testingFile = "{0}\Tests\TestingConditions.config" -f $here
 Write-Host("Testing file: {0}" -f $testingFile)
 Import-ScriptConfigFile -ScriptConfigFileLocation $testingFile
 Describe "Testing Import-ScriptConfigFile" {
@@ -67,7 +67,7 @@ Describe "Testing Import-ScriptConfigFile" {
             $EventID | Should not be $null
         }
         It "Testing EventID type" {
-            $EventID.GetType().Name | Should be "int64"
+            $EventID.GetType().Name | Should be "int32"
         }
         It "Testing EventID value" {
             $EventID | Should be 2024
@@ -79,7 +79,7 @@ Describe "Testing Import-ScriptConfigFile" {
             $MDBFailureItemTags.count | Should be 2
         }
         It "Testing MDBFailureItemTags type" {
-            $MDBFailureItemTags[0].GetType().Name | Should be "int64"
+            $MDBFailureItemTags[0].GetType().Name | Should be "int32"
         }
     }
 }
