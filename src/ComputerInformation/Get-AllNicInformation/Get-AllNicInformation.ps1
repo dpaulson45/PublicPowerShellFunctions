@@ -121,7 +121,14 @@ Function Get-AllNicInformation {
             if (!$WmiObject) {
                 Write-VerboseWriter("Working on NIC: {0}" -f $networkConfig.InterfaceDescription)
                 $adapter = $networkConfig.NetAdapter
-                $nicPnpCapabilitiesSetting = Get-NicPnpCapabilitiesSetting -NicAdapterComponentId $adapter.DeviceID
+                if ($adapter.DriverFileName -ne "NdisImPlatform.sys") {
+                    $nicPnpCapabilitiesSetting = Get-NicPnpCapabilitiesSetting -NicAdapterComponentId $adapter.DeviceID
+                } else {
+                    Write-VerboseWriter("Multiplexor adapter detected. Going to skip PnpCapabilities check")
+                    $nicPnpCapabilitiesSetting = @{
+                        PnPCapabilities = "MultiplexorNoPnP"
+                    }
+                }
 
                 try {
                     $dnsClient = $adapter | Get-DnsClient -ErrorAction Stop
@@ -148,7 +155,14 @@ Function Get-AllNicInformation {
             } else {
                 Write-VerboseWriter("Working on NIC: {0}" -f $networkConfig.Description)
                 $adapter = $networkConfig
-                $nicPnpCapabilitiesSetting = Get-NicPnpCapabilitiesSetting -NicAdapterComponentId $adapter.Guid
+                if ($adapter.ServiceName -ne "NdisImPlatformMp") {
+                    $nicPnpCapabilitiesSetting = Get-NicPnpCapabilitiesSetting -NicAdapterComponentId $adapter.Guid
+                } else {
+                    Write-VerboseWriter("Multiplexor adapter detected. Going to skip PnpCapabilities check")
+                    $nicPnpCapabilitiesSetting = @{
+                        PnPCapabilities = "MultiplexorNoPnP"
+                    }
+                }
             }
 
             $nicInformationObj = New-Object PSCustomObject
