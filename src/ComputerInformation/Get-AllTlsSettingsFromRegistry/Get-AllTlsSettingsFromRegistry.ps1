@@ -32,7 +32,7 @@ Function Get-AllTlsSettingsFromRegistry {
                     Write-VerboseWriter("Failed to get TLS {0} {1} Enabled Key on Server {2}. We are assuming this means it is enabled." -f $TlsVersion, $ServerClientType, $MachineName)
                     return $true
                 } else {
-                    Write-VerboseWriter("{0} Enabled Value '{1}'" -f $ServerClientType, $serverValue)
+                    Write-VerboseWriter("{0} Enabled Value '{1}'" -f $ServerClientType, $KeyValue)
                     if ($KeyValue -eq 1) {
                         return $true
                     }
@@ -44,7 +44,7 @@ Function Get-AllTlsSettingsFromRegistry {
                     Write-VerboseWriter("Failed to get TLS {0} {1} Disabled By Default Key on Server {2}. Setting to false." -f $TlsVersion, $ServerClientType, $MachineName)
                     return $false
                 } else {
-                    Write-VerboseWriter("{0} Disabled By Default Value '{1}'" -f $ServerClientType, $serverValue)
+                    Write-VerboseWriter("{0} Disabled By Default Value '{1}'" -f $ServerClientType, $KeyValue)
                     if ($KeyValue -eq 1) {
                         return $true
                     }
