@@ -29,7 +29,9 @@ Function Get-AllTlsSettingsFromRegistry {
         switch ($GetKeyType) {
             "Enabled" {
                 if ($null -eq $KeyValue) {
-                    Write-VerboseWriter("Failed to get TLS {0} {1} Enabled Key on Server {2}. We are assuming this means it is enabled." -f $TlsVersion, $ServerClientType, $MachineName)
+                    Write-VerboseWriter("Failed to get TLS {0} {1} Enabled Key on Server {2}. We are assuming this means it is enabled." -f $TlsVersion, `
+                            $ServerClientType, `
+                            $MachineName)
                     return $true
                 } else {
                     Write-VerboseWriter("{0} Enabled Value '{1}'" -f $ServerClientType, $KeyValue)
@@ -41,7 +43,9 @@ Function Get-AllTlsSettingsFromRegistry {
             }
             "DisabledByDefault" {
                 if ($null -eq $KeyValue) {
-                    Write-VerboseWriter("Failed to get TLS {0} {1} Disabled By Default Key on Server {2}. Setting to false." -f $TlsVersion, $ServerClientType, $MachineName)
+                    Write-VerboseWriter("Failed to get TLS {0} {1} Disabled By Default Key on Server {2}. Setting to false." -f $TlsVersion, `
+                            $ServerClientType, `
+                            $MachineName)
                     return $false
                 } else {
                     Write-VerboseWriter("{0} Disabled By Default Value '{1}'" -f $ServerClientType, $KeyValue)
@@ -83,11 +87,23 @@ Function Get-AllTlsSettingsFromRegistry {
             $memberServerName = "Server{0}" -f $getKey
             $memberClientName = "Client{0}" -f $getKey
 
-            $serverValue = Invoke-RegistryGetValue -RegistryHive "LocalMachine" -MachineName $MachineName -SubKey $registryServer -GetValue $getKey -CatchActionFunction $CatchActionFunction
-            $clientValue = Invoke-RegistryGetValue -RegistryHive "LocalMachine" -MachineName $MachineName -SubKey $registryClient -GetValue $getKey -CatchActionFunction $CatchActionFunction
+            $serverValue = Invoke-RegistryGetValue `
+                -MachineName $MachineName `
+                -SubKey $registryServer `
+                -GetValue $getKey `
+                -CatchActionFunction $CatchActionFunction
+            $clientValue = Invoke-RegistryGetValue `
+                -MachineName $MachineName `
+                -SubKey $registryClient `
+                -GetValue $getKey `
+                -CatchActionFunction $CatchActionFunction
 
-            $currentTLSObject | Add-Member -MemberType NoteProperty -Name $memberServerName -Value (Get-TLSMemberValue -GetKeyType $getKey -KeyValue $serverValue -ServerClientType "Server" -TlsVersion $tlsVersion)
-            $currentTLSObject | Add-Member -MemberType NoteProperty -Name $memberClientName -Value (Get-TLSMemberValue -GetKeyType $getKey -KeyValue $clientValue -ServerClientType "Client" -TlsVersion $tlsVersion)
+            $currentTLSObject | Add-Member -MemberType NoteProperty `
+                -Name $memberServerName `
+                -Value (Get-TLSMemberValue -GetKeyType $getKey -KeyValue $serverValue -ServerClientType "Server" -TlsVersion $tlsVersion)
+            $currentTLSObject | Add-Member -MemberType NoteProperty `
+                -Name $memberClientName `
+                -Value (Get-TLSMemberValue -GetKeyType $getKey -KeyValue $clientValue -ServerClientType "Client" -TlsVersion $tlsVersion)
         }
         $allTlsObjects.Add($tlsVersion, $currentTLSObject)
     }
@@ -98,11 +114,22 @@ Function Get-AllTlsSettingsFromRegistry {
         $currentNetTlsDefaultVersionObject = New-Object PSCustomObject
         $currentNetTlsDefaultVersionObject | Add-Member -MemberType NoteProperty -Name "NetVersion" -Value $netVersion
 
-        $SystemDefaultTlsVersions = Invoke-RegistryGetValue -RegistryHive "LocalMachine" -MachineName $MachineName -SubKey ($registryBase -f "Microsoft", $netVersion) -GetValue "SystemDefaultTlsVersions" -CatchActionFunction $CatchActionFunction
-        $WowSystemDefaultTlsVersions = Invoke-RegistryGetValue -RegistryHive "LocalMachine" -MachineName $MachineName -SubKey ($registryBase -f "Wow6432Node\Microsoft", $netVersion) -GetValue "SystemDefaultTlsVersions" -CatchActionFunction $CatchActionFunction
+        $SystemDefaultTlsVersions = Invoke-RegistryGetValue `
+            -MachineName $MachineName `
+            -SubKey ($registryBase -f "Microsoft", $netVersion) `
+            -GetValue "SystemDefaultTlsVersions" `
+            -CatchActionFunction $CatchActionFunction
+        $WowSystemDefaultTlsVersions = Invoke-RegistryGetValue `
+            -MachineName $MachineName `
+            -SubKey ($registryBase -f "Wow6432Node\Microsoft", $netVersion) `
+            -GetValue "SystemDefaultTlsVersions" `
+            -CatchActionFunction $CatchActionFunction
 
-        $currentNetTlsDefaultVersionObject | Add-Member -MemberType NoteProperty -Name "SystemDefaultTlsVersions" -Value (Get-NETDefaultTLSValue -KeyValue $SystemDefaultTlsVersions -NetVersion $netVersion -KeyName "SystemDefaultTlsVersions")
-        $currentNetTlsDefaultVersionObject | Add-Member -MemberType NoteProperty -Name "WowSystemDefaultTlsVersions" -Value (Get-NETDefaultTLSValue -KeyValue $WowSystemDefaultTlsVersions -NetVersion $netVersion -KeyName "WowSystemDefaultTlsVersions")
+        $currentNetTlsDefaultVersionObject = [PSCustomObject]@{
+            NetVersion                  = $netVersion
+            SystemDefaultTlsVersions    = (Get-NETDefaultTLSValue -KeyValue $SystemDefaultTlsVersions -NetVersion $netVersion -KeyName "SystemDefaultTlsVersions")
+            WowSystemDefaultTlsVersions = (Get-NETDefaultTLSValue -KeyValue $WowSystemDefaultTlsVersions -NetVersion $netVersion -KeyName "WowSystemDefaultTlsVersions")
+        }
 
         $hashKeyName = "NET{0}" -f ($netVersion.Split(".")[0])
         $allTlsObjects.Add($hashKeyName, $currentNetTlsDefaultVersionObject)
