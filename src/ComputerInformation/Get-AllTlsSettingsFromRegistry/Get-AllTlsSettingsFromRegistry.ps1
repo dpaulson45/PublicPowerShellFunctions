@@ -119,6 +119,11 @@ Function Get-AllTlsSettingsFromRegistry {
             -SubKey ($registryBase -f "Microsoft", $netVersion) `
             -GetValue "SystemDefaultTlsVersions" `
             -CatchActionFunction $CatchActionFunction
+        $SchUseStrongCrypto = Invoke-RegistryGetValue `
+            -MachineName $MachineName `
+            -SubKey ($registryBase -f "Microsoft", $netVersion) `
+            -GetValue "SchUseStrongCrypto" `
+            -CatchActionFunction $CatchActionFunction
         $WowSystemDefaultTlsVersions = Invoke-RegistryGetValue `
             -MachineName $MachineName `
             -SubKey ($registryBase -f "Wow6432Node\Microsoft", $netVersion) `
@@ -128,6 +133,7 @@ Function Get-AllTlsSettingsFromRegistry {
         $currentNetTlsDefaultVersionObject = [PSCustomObject]@{
             NetVersion                  = $netVersion
             SystemDefaultTlsVersions    = (Get-NETDefaultTLSValue -KeyValue $SystemDefaultTlsVersions -NetVersion $netVersion -KeyName "SystemDefaultTlsVersions")
+            SchUseStrongCrypto          = (Get-NETDefaultTLSValue -KeyValue $SchUseStrongCrypto -NetVersion $netVersion -KeyName "SchUseStrongCrypto")
             WowSystemDefaultTlsVersions = (Get-NETDefaultTLSValue -KeyValue $WowSystemDefaultTlsVersions -NetVersion $netVersion -KeyName "WowSystemDefaultTlsVersions")
         }
 
