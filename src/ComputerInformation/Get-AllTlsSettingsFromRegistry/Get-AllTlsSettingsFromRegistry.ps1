@@ -10,6 +10,7 @@ Function Get-AllTlsSettingsFromRegistry {
     Required Functions:
         https://raw.githubusercontent.com/dpaulson45/PublicPowerShellFunctions/master/src/Common/Write-VerboseWriters/Write-VerboseWriter.ps1
         https://raw.githubusercontent.com/dpaulson45/PublicPowerShellFunctions/master/src/ComputerInformation/Invoke-RegistryGetValue/Invoke-RegistryGetValue.ps1
+        https://github.com/dpaulson45/PublicPowerShellFunctions/blob/master/src/Common/Invoke-ScriptBlockHandler/Invoke-ScriptBlockHandler.ps1
     #>
 
     Write-VerboseWriter("Calling: Get-AllTlsSettingsFromRegistry")
@@ -135,6 +136,7 @@ Function Get-AllTlsSettingsFromRegistry {
             SystemDefaultTlsVersions    = (Get-NETDefaultTLSValue -KeyValue $SystemDefaultTlsVersions -NetVersion $netVersion -KeyName "SystemDefaultTlsVersions")
             SchUseStrongCrypto          = (Get-NETDefaultTLSValue -KeyValue $SchUseStrongCrypto -NetVersion $netVersion -KeyName "SchUseStrongCrypto")
             WowSystemDefaultTlsVersions = (Get-NETDefaultTLSValue -KeyValue $WowSystemDefaultTlsVersions -NetVersion $netVersion -KeyName "WowSystemDefaultTlsVersions")
+            SecurityProtocol            = (Invoke-ScriptBlockHandler -ComputerName $MachineName -ScriptBlock { ([System.Net.ServicePointManager]::SecurityProtocol).ToString() } -CatchActionFunction $CatchActionFunction)
         }
 
         $hashKeyName = "NET{0}" -f ($netVersion.Split(".")[0])
