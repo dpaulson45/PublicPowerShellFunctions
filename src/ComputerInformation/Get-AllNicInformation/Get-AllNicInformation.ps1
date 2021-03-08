@@ -29,6 +29,7 @@ Function Get-AllNicInformation {
         $nicAdapterBasicPath = "SYSTEM\CurrentControlSet\Control\Class\{4D36E972-E325-11CE-BFC1-08002bE10318}"
         Write-VerboseWriter("Probing started to detect NIC adapter registry path")
         [int]$i = 0
+        [int]$retryCounter = 0
 
         do {
             $nicAdapterPnPCapabilitiesProbingKey = "{0}\{1}" -f $nicAdapterBasicPath, ($i.ToString().PadLeft(4, "0"))
@@ -40,9 +41,13 @@ Function Get-AllNicInformation {
                 break
             } else {
                 Write-VerboseWriter("No matching ComponentId found")
+                if ($null -eq $netCfgInstanceId) {
+                    $retryCounter++
+                    Write-VerboseWriter("Enumeration possibly interrupted. Attempt: {0}/3" -f $retryCounter)
+                }
                 $i++
             }
-        } while ($null -ne $netCfgInstanceId)
+        } while ($retryCounter -le 2)
 
         $obj = New-Object PSCustomObject
         $sleepyNicDisabled = $false
