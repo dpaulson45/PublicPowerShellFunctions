@@ -36,11 +36,11 @@ Function Get-ExchangeBuildVersionInformation {
 
     Write-VerboseWriter("Determining Major Version based off of $product")
 
-    switch ($product) {
-        14.3 { $exchangeMajorVersion = "Exchange2010" }
-        15 { $exchangeMajorVersion = "Exchange2013" }
-        15.1 { $exchangeMajorVersion = "Exchange2016" }
-        15.2 { $exchangeMajorVersion = "Exchange2019" }
+    switch ([string]$product) {
+        "14.3" { $exchangeMajorVersion = "Exchange2010" }
+        "15" { $exchangeMajorVersion = "Exchange2013" }
+        "15.1" { $exchangeMajorVersion = "Exchange2016" }
+        "15.2" { $exchangeMajorVersion = "Exchange2019" }
         default { $exchangeMajorVersion = "Unknown" }
     }
 
