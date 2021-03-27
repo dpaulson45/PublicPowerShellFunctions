@@ -2,4 +2,4 @@ param(
 
 )
 
-Invoke-Pester $PSScriptRoot\..\src\Common\Import-ScriptConfigFile\Tests\Import-ScriptConfigFile.Tests.ps1
+Invoke-Pester -Path $PSScriptRoot\..\src\Common\Import-ScriptConfigFile\Tests\Import-ScriptConfigFile.Tests.ps1
