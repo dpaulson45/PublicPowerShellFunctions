@@ -24,3 +24,8 @@ steps:
     cd .\.build
     .\Invoke-BuildPipeline.ps1 -CodeFormatCheck
   displayName: "Invoke Build Pipeline"
+
+- pwsh: |
+    cd .\.build
+    .\Invoke-Testing.ps1
+  displayName: "Pester Testing"
