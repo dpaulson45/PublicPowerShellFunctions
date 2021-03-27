@@ -36,7 +36,7 @@ Describe "Testing Import-ScriptConfigFile" {
     Context "Testing Results" {
 
         It "Testing ExtraTraceConfigFileContent not null" {
-            $ExtraTraceConfigFileContent | Should -not -be $null
+            $ExtraTraceConfigFileContent | Should -be $null
         }
         It "Testing ExtraTraceConfigFileContent Count" {
             $ExtraTraceConfigFileContent.Count | Should -be 7
